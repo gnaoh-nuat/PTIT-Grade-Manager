@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- TIÊU ĐỀ SINH VIÊN -->
+    <TextView
+        android:id="@+id/tv_student_name_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#333333"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"
+        tools:text="Nguyễn Văn A - B20DCCN001" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Chỉnh sửa Điểm thành phần (0.0 - 10.0)"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- KHU VỰC ĐIỂM (SẼ ĐƯỢC TẠO ĐỘNG BẰNG item_score_edit.xml) -->
+    <LinearLayout
+        android:id="@+id/ll_score_components"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginVertical="16dp"/>
+
+    <!-- KHU VỰC KẾT QUẢ TỔNG KẾT (NỔI BẬT) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp"
+        android:paddingHorizontal="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Điểm tổng kết"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"/>
+            <TextView
+                android:id="@+id/tv_final_score_bs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="8.50"
+                android:textColor="#FF6600"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xếp loại"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"/>
+            <TextView
+                android:id="@+id/tv_final_grade_letter_bs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="A"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="@drawable/statistic_box_background"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- NÚT CẬP NHẬT -->
+    <Button
+        android:id="@+id/btn_update_scores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cập nhật điểm"
+        android:backgroundTint="#FF6600"
+        android:textColor="@android:color/white"
+        android:padding="14dp"/>
+
+</LinearLayout>

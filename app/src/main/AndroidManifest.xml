@@ -13,7 +13,6 @@
         android:theme="@style/Theme.PTITGradeManager"
         tools:targetApi="31">
 
-        <!-- Activity Đăng nhập sẽ là màn hình khởi chạy ứng dụng -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -23,16 +22,16 @@
             </intent-filter>
         </activity>
 
-        <!-- Khai báo các Activity chung khác -->
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
 
-        <!-- Khai báo các Activity dành cho Sinh viên -->
         <activity android:name=".Student.activities.StudentHomepage" />
 
-        <!-- Khai báo các Activity dành cho Giáo viên -->
-        <activity android:name=".Teacher.activities.TeacherHomepage" />
+        <activity android:name=".Teacher.activities.TeacherMainActivity"
+            android:exported="true"/>
+        <activity android:name=".Teacher.activities.CreateEditClassActivity" />
 
+        <activity android:name=".Teacher.activities.TeacherClassDetailActivity" />
     </application>
 
 </manifest>

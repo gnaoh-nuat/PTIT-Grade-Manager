@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Màu thương hiệu chính: Màu Cam -->
+    <color name="primary_brand">#FF6600</color>
+    <!-- Màu Xám mặc định cho Bottom Nav -->
+    <color name="default_inactive_gray">#666666</color>
+
+    <color name="excellent_color">#4CAF50</color>
+    <color name="good_color">#8BC34A</color>
+    <color name="fair_color">#2196F3</color>
+    <!-- Dùng primary_brand thay cho average_color trong Bottom Nav -->
+    <color name="average_color">#FFC107</color>
+    <color name="poor_color">#F44336</color>
 </resources>

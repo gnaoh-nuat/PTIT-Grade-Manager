@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Màu khi item được chọn (Active Color): Sử dụng màu Cam nổi bật (#FF6600) -->
+    <!-- Tôi sử dụng 'average_color' vì nó có giá trị màu Cam đậm tương tự #FF6600 -->
+    <item android:state_checked="true" android:color="@color/average_color" />
+
+    <!-- Màu khi item không được chọn (Default Color): Sử dụng màu Đen (hoặc Xám đậm nếu muốn) -->
+    <item android:color="@color/black" />
+</selector>

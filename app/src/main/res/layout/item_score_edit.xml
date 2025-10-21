@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="4dp"
+    android:layout_marginBottom="4dp">
+
+    <TextView
+        android:id="@+id/tv_score_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Tên thành phần"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <!-- SỬ DỤNG TextInputLayout ĐỂ CÓ KIỂU DÁNG OUTLINED BOX -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:hintEnabled="false"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp">
+
+        <EditText
+            android:id="@+id/et_score_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0.0 - 10.0"
+            android:inputType="numberDecimal"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:textSize="14sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

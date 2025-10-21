@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ptit_grade_manager.Student.activities.StudentHomepage
-import com.example.ptit_grade_manager.Teacher.activities.TeacherHomepage
+import com.example.ptit_grade_manager.Teacher.activities.TeacherMainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             } else if(email.contains("teacher")) {
                 Toast.makeText(this, "Đăng nhập thành công với tư cách Giáo viên", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, TeacherHomepage::class.java)
+                val intent = Intent(this, TeacherMainActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
