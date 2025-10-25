@@ -1,4 +1,4 @@
-package com.example.ptit_grade_manager.Teacher.model
+package com.example.ptit_grade_manager.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -10,10 +10,15 @@ enum class AcademicRank {
 
 @Parcelize
 data class StudentInClass(
+
     val id: String,         // Mã sinh viên
+
     var name: String,
+
     var gender: String,     // Giới tính
+
     var avatarUrl: String? = null, // Đường dẫn tới ảnh avatar
+
     var scores: MutableMap<String, Double?> = mutableMapOf(
         "Chuyên cần" to null,
         "Bài tập lớn" to null,

@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.ptit_grade_manager.R
-import com.example.ptit_grade_manager.Teacher.model.StudentInClass
+import com.example.ptit_grade_manager.model.StudentInClass
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class EditStudentScoreSheet : BottomSheetDialogFragment() {

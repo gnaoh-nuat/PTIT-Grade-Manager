@@ -7,8 +7,14 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ptit_grade_manager.model.Student
+import com.example.ptit_grade_manager.model.UserRole
+import com.example.ptit_grade_manager.service.AuthService
+import com.example.ptit_grade_manager.util.Resource
 
 class RegisterActivity : AppCompatActivity() {
+
+    private val authService by lazy { AuthService() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         val etName = findViewById<EditText>(R.id.et_name)
         val etEmail = findViewById<EditText>(R.id.et_email)
         val etDob = findViewById<EditText>(R.id.et_dob) // Date of Birth
-        // Thêm RadioGroup cho Giới tính nếu cần
         val etPassword = findViewById<EditText>(R.id.et_password)
         val etConfirmPassword = findViewById<EditText>(R.id.et_confirm_password)
         val btnRegister = findViewById<Button>(R.id.btn_register)
@@ -42,16 +47,33 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // --- Logic xử lý đăng ký cho sinh viên ---
-            Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show()
-            finish() // Quay lại trang trước (LoginActivity)
+            // SỬA: Tạo đối tượng Student (vì hàm yêu cầu Student)
+            val newStudent = Student(
+                id = null, // UID sẽ được gán trong Repository
+                studentId = studentId,
+                fullName = name,
+                email = email,
+                dateOfBirth = dob,
+                role = UserRole.STUDENT
+            )
+
+            // SỬA: Gọi hàm registerStudent từ AuthService
+            authService.registerStudent(newStudent, password) { result ->
+                when (result) {
+                    is Resource.Success<*> -> {
+                        Toast.makeText(this, "Đăng ký thành công! Vui lòng đăng nhập.", Toast.LENGTH_LONG).show()
+                        finish() // Quay lại trang đăng nhập
+                    }
+                    is Resource.Error -> {
+                        // Hiển thị lỗi cụ thể từ Firebase (ví dụ: email đã tồn tại)
+                        Toast.makeText(this, "Đăng ký thất bại: ${result.exception.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
 
-        // --- ĐÃ DI CHUYỂN RA ĐÚNG VỊ TRÍ ---
-        // Xử lý sự kiện nhấn vào "Quay lại Đăng nhập"
         tvBackToLogin.setOnClickListener {
-            finish() // Lệnh này sẽ đóng màn hình hiện tại và quay lại màn hình trước đó
+            finish()
         }
     }
 }
-

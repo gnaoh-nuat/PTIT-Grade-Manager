@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Bạn đã thêm MyApplication, rất tốt -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,25 +15,32 @@
         android:theme="@style/Theme.PTITGradeManager"
         tools:targetApi="31">
 
+        <!-- SỬA 1: Đặt SPLASH ACTIVITY làm LAUNCHER (màn hình khởi động) -->
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"> <!-- Thêm theme để ẩn thanh tiêu đề cho đẹp -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- SỬA 2: Xóa LAUNCHER khỏi LOGIN ACTIVITY -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
+        <!-- Các Activity khác giữ nguyên -->
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-
         <activity android:name=".Student.activities.StudentHomepage" />
-
-        <activity android:name=".Teacher.activities.TeacherMainActivity"
-            android:exported="true"/>
+        <activity android:name=".Teacher.activities.TeacherMainActivity" />
         <activity android:name=".Teacher.activities.CreateEditClassActivity" />
-
         <activity android:name=".Teacher.activities.TeacherClassDetailActivity" />
+
     </application>
 
 </manifest>

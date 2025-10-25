@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ptit_grade_manager.R
-import com.example.ptit_grade_manager.Teacher.model.ClassInfo
+import com.example.ptit_grade_manager.model.ClassInfo
 
 
 class TeacherClassListAdapter(

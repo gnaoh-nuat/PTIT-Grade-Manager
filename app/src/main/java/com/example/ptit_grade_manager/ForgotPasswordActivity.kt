@@ -1,6 +1,5 @@
 package com.example.ptit_grade_manager
 
-
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,8 +8,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ptit_grade_manager.service.AuthService
+import com.example.ptit_grade_manager.util.Resource
 
 class ForgotPasswordActivity : AppCompatActivity() {
+
+    // SỬA: Khởi tạo AuthService
+    private val authService by lazy { AuthService() }
 
     private lateinit var step1Layout: LinearLayout
     private lateinit var step2Layout: LinearLayout
@@ -25,7 +29,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
 
-        // Khai báo các thành phần UI
         step1Layout = findViewById(R.id.step1_layout)
         step2Layout = findViewById(R.id.step2_layout)
         step3Layout = findViewById(R.id.step3_layout)
@@ -41,8 +44,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val tvHeader = findViewById<TextView>(R.id.tv_header_forgot)
         val tvBackToLogin = findViewById<TextView>(R.id.tv_back_to_login_forgot)
 
-
-        // Ban đầu chỉ hiển thị bước 1
         showStep(1)
 
         // Xử lý sự kiện nút "Tiếp tục" (Bước 1)
@@ -52,59 +53,53 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // --- Logic gửi mã OTP đến email ---
-            // Gọi API để yêu cầu gửi mã OTP
-            Toast.makeText(this, "Mã OTP đã được gửi đến email của bạn", Toast.LENGTH_SHORT).show()
-            tvHeader.text = "Nhập Mã Xác Thực"
-            showStep(2)
+
+            // SỬA: Gọi hàm sendPasswordResetEmail từ AuthService
+            authService.sendPasswordResetEmail(email) { result ->
+                when (result) {
+                    is Resource.Success ->{
+                        Toast.makeText(this, "Đã gửi email khôi phục. Vui lòng kiểm tra email!", Toast.LENGTH_LONG).show()
+
+                        // --- Xem LƯU Ý QUAN TRỌNG bên dưới ---
+                        // Giao diện của bạn (Bước 2, 3) là cho OTP, nhưng Firebase gửi MỘT ĐƯỜNG LINK.
+                        // Bạn có thể thông báo cho người dùng và đóng activity này.
+                        finish()
+
+                        // Hoặc nếu bạn vẫn muốn hiển thị Bước 2 (dù không logic lắm với Firebase):
+                        // tvHeader.text = "Kiểm Tra Email Của Bạn"
+                        // showStep(2) // (Bước 2, 3 sẽ không hoạt động đúng)
+                    }
+                    is Resource.Error -> {
+                        Toast.makeText(this, "Gửi email thất bại: ${result.exception.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
 
         // Xử lý sự kiện nút "Xác nhận" (Bước 2)
         btnConfirmOtp.setOnClickListener {
-            val otp = etOtp.text.toString().trim()
-            if (otp.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập mã OTP", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            // --- Logic xác thực mã OTP ---
-            // Gọi API để kiểm tra mã OTP có hợp lệ không
-            Toast.makeText(this, "Xác thực OTP thành công", Toast.LENGTH_SHORT).show()
+            // ... Logic xác thực OTP của bạn (nếu có server riêng) ...
+            // (AuthService hiện tại không hỗ trợ xác thực OTP)
             tvHeader.text = "Tạo Mật Khẩu Mới"
             showStep(3)
         }
 
         // Xử lý sự kiện nút "Hoàn tất" (Bước 3)
         btnFinish.setOnClickListener {
-            val newPassword = etNewPassword.text.toString()
-            val confirmNewPassword = etConfirmNewPassword.text.toString()
-
-            if (newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (newPassword != confirmNewPassword) {
-                Toast.makeText(this, "Mật khẩu mới không khớp", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // --- Logic cập nhật mật khẩu mới ---
-            // Gọi API để đặt lại mật khẩu cho người dùng
+            // ... Logic cập nhật mật khẩu của bạn (nếu có server riêng) ...
+            // (AuthService hiện tại không hỗ trợ cập nhật mật khẩu bằng OTP)
             Toast.makeText(this, "Đổi mật khẩu thành công!", Toast.LENGTH_SHORT).show()
-            finish() // Kết thúc và quay về trang đăng nhập
+            finish()
         }
 
-        // Xử lý sự kiện nhấn vào "Quay lại Đăng nhập"
         tvBackToLogin.setOnClickListener {
-            finish() // Đóng màn hình hiện tại để quay về màn hình đăng nhập
+            finish()
         }
     }
 
-    // Hàm để ẩn/hiện các bước
     private fun showStep(step: Int) {
         step1Layout.visibility = if (step == 1) View.VISIBLE else View.GONE
         step2Layout.visibility = if (step == 2) View.VISIBLE else View.GONE
         step3Layout.visibility = if (step == 3) View.VISIBLE else View.GONE
     }
 }
-

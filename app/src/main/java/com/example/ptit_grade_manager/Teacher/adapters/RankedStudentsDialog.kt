@@ -11,9 +11,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ptit_grade_manager.R
-import com.example.ptit_grade_manager.Teacher.adapters.RankedStudentAdapter // Đã import đúng
-import com.example.ptit_grade_manager.Teacher.model.ClassInfo
-import com.example.ptit_grade_manager.Teacher.model.StudentInClass
+import com.example.ptit_grade_manager.model.ClassInfo
+import com.example.ptit_grade_manager.model.StudentInClass
 import androidx.recyclerview.widget.DividerItemDecoration
 
 class RankedStudentsDialog : DialogFragment() {

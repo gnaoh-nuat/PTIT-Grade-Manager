@@ -16,8 +16,8 @@ import com.example.ptit_grade_manager.Teacher.activities.CreateEditClassActivity
 import com.example.ptit_grade_manager.Teacher.activities.TeacherClassDetailActivity
 // Giả định bạn có Adapter và Model:
 // import com.example.ptit_grade_manager.Teacher.adapter.TeacherClassListAdapter
-// import com.example.ptit_grade_manager.Teacher.model.ClassInfo
-import com.example.ptit_grade_manager.Teacher.model.ClassInfo
+// import com.example.ptit_grade_manager.model.ClassInfo
+import com.example.ptit_grade_manager.model.ClassInfo
 import com.example.ptit_grade_manager.Teacher.adapters.TeacherClassListAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

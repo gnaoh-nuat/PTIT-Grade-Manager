@@ -1,6 +1,5 @@
 package com.example.ptit_grade_manager
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,8 +9,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ptit_grade_manager.Student.activities.StudentHomepage
 import com.example.ptit_grade_manager.Teacher.activities.TeacherMainActivity
+import com.example.ptit_grade_manager.model.UserRole
+import com.example.ptit_grade_manager.service.AuthService
+import com.example.ptit_grade_manager.util.Resource
+import com.google.firebase.FirebaseApp
 
 class LoginActivity : AppCompatActivity() {
+
+    // Giữ nguyên, đã đúng
+    private val authService by lazy { AuthService() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,26 +38,44 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // --- Logic xử lý đăng nhập ---
-            // Ở đây, bạn sẽ gọi API hoặc kiểm tra với Firebase Authentication
-            // Dựa vào email, xác định đây là tài khoản sinh viên hay giáo viên
+            // SỬA: Gọi hàm login từ AuthService và xử lý callback Result<User>
+            authService.login(email, password) { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        val user = result.data // 'user' bây giờ sẽ được hiểu là kiểu 'User'
+                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
 
-            // Giả lập logic: nếu email chứa "student", chuyển đến trang sinh viên
-            // Ngược lại, chuyển đến trang giáo viên
-            if (email.contains("student")) {
-                Toast.makeText(this, "Đăng nhập thành công với tư cách Sinh viên", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, StudentHomepage::class.java)
-                startActivity(intent)
-                finish()
-            } else if(email.contains("teacher")) {
-                Toast.makeText(this, "Đăng nhập thành công với tư cách Giáo viên", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, TeacherMainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Email hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show()
+                        // Dòng này sẽ hết lỗi
+                        when (user.role) {
+                            UserRole.STUDENT -> {
+                                val intent = Intent(this, StudentHomepage::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            UserRole.TEACHER -> {
+                                val intent = Intent(this, TeacherMainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            else -> {
+                                Toast.makeText(
+                                    this,
+                                    "Không xác định được vai trò người dùng",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                    // Đăng nhập hoặc lấy dữ liệu thất bại
+                    is Resource.Error -> {
+                        Toast.makeText(this, "Email hoặc mật khẩu không chính xác: ${result.exception.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
+
 
         tvRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -64,5 +88,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
-

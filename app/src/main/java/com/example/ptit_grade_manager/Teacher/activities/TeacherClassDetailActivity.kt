@@ -17,17 +17,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ptit_grade_manager.R
 import com.example.ptit_grade_manager.Teacher.adapters.RankedStudentsDialog
 import com.example.ptit_grade_manager.Teacher.adapters.TeacherStudentListAdapter
-import com.example.ptit_grade_manager.Teacher.model.AcademicRank
-import com.example.ptit_grade_manager.Teacher.model.ClassInfo
-import com.example.ptit_grade_manager.Teacher.model.StudentInClass
+import com.example.ptit_grade_manager.model.AcademicRank
+import com.example.ptit_grade_manager.model.ClassInfo
+import com.example.ptit_grade_manager.model.StudentInClass
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TeacherClassDetailActivity : AppCompatActivity(), EditStudentScoreSheet.ScoreUpdateListener {
 
     private var classInfo: ClassInfo? = null
     private lateinit var studentAdapter: TeacherStudentListAdapter
-
-    // Khai báo TextViews ở ngoài để dễ dàng cập nhật
     private lateinit var tvTeacherName: TextView
     private lateinit var tvStudentCount: TextView
     private lateinit var tvClassCode: TextView // KHAI BÁO MÃ HP

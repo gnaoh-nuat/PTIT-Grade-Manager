@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.ptit_grade_manager.R
-import com.example.ptit_grade_manager.Teacher.model.ClassInfo
+import com.example.ptit_grade_manager.model.ClassInfo
 import java.util.UUID
 
 class CreateEditClassActivity : AppCompatActivity() {

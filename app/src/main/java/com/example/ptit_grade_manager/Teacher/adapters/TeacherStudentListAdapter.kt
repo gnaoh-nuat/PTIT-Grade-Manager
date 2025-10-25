@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ptit_grade_manager.R
-import com.example.ptit_grade_manager.Teacher.model.StudentInClass
+import com.example.ptit_grade_manager.model.StudentInClass
 
 class TeacherStudentListAdapter(
     private var studentList: MutableList<StudentInClass>, // THAY ĐỔI: Dùng MutableList
